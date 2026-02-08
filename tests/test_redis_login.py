@@ -4,13 +4,7 @@ from redis.asyncio import Redis
 from app.core.config import settings
 
 BASE_URL = f"http://localhost:8000{settings.API_V1_STR}"
-# Use the computed REDIS_URI from settings which includes password if set
-REDIS_URL = (
-    settings.REDIS_URI
-    or f"redis://:{settings.REDIS_PASSWORD}@{settings.REDIS_HOST}:{settings.REDIS_PORT}"
-    if settings.REDIS_PASSWORD
-    else f"redis://{settings.REDIS_HOST}:{settings.REDIS_PORT}"
-)
+REDIS_URL = settings.REDIS_URI
 
 
 async def test_redis_login():
@@ -75,7 +69,7 @@ async def test_redis_login():
         else:
             print("FAILURE: Token NOT found in Redis.")
 
-        await redis.close()
+        await redis.aclose()
 
 
 if __name__ == "__main__":

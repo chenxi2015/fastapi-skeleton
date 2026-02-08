@@ -11,9 +11,11 @@ This is a robust, scalable, and production-ready FastAPI skeleton framework.
 - **MySQL**: Database backend.
 - **Redis**: Caching and session storage.
 - **JWT Authentication**: Secure authentication with OAuth2PasswordBearer.
+- **DAO Pattern**: Clean separation of concerns with `crud/` layer.
+- **Custom Middleware**: Request logging and CORS support.
 - **Pydantic**: Data validation and settings management.
 - **Alembic**: Database migrations.
-- **Docker Compose**: Easy local development setup.
+- **uv**: Modern Python packaging and dependency management.
 
 ## Setup using `uv`
 
@@ -62,24 +64,41 @@ This project uses Alembic for database migrations.
     uv run alembic upgrade head
     ```
 
+## Testing
+
+Run tests using `pytest`:
+```bash
+uv run pytest
+```
+
+## Utility Scripts
+
+Helpful scripts located in the `scripts/` directory:
+
+- **Create Test User**:
+  ```bash
+  uv run python scripts/create_test_user.py
+  ```
+
 ## Project Structure
 
 ```
 fastapi-skeleton/
 ├── app/
-│   ├── api/                # API Endpoints
-│   ├── core/               # Core config & security
-│   ├── db/                 # Database setup
+│   ├── api/                # API Endpoints (v1)
+│   ├── core/               # Core config, constants & security
+│   ├── db/                 # Database & Redis setup
 │   ├── models/             # SQLAlchemy Models
 │   ├── schemas/            # Pydantic Schemas
-│   ├── crud/               # DAO / Repository
-│   ├── middleware/         # Custom Middleware
-│   └── main.py             # Entrypoint
+│   ├── crud/               # DAO / Repository Layer
+│   ├── middleware/         # Custom Middleware (Logging, etc.)
+│   └── main.py             # FastAPI Entrypoint
 ├── alembic/                # Migration scripts
-├── tests/                  # Tests
+├── scripts/                # Utility scripts (e.g., seeding)
+├── tests/                  # Pytest test cases
 ├── .env.example            # Environment variables example
-├── pyproject.toml          # Uv config
-└── requirements.txt        # Pip requirements (Generated via uv export)
+├── pyproject.toml          # Uv configuration & dependencies
+└── requirements.txt        # Pip requirements (Exported via uv)
 ```
 
 ---
@@ -95,9 +114,11 @@ fastapi-skeleton/
 - **MySQL**: 数据库后端。
 - **Redis**: 缓存和会话存储。
 - **JWT 认证**: 使用 OAuth2PasswordBearer 的安全认证。
+- **DAO 模式**: 使用 `crud/` 层实现清晰的关注点分离。
+- **自定义中间件**: 请求日志记录和 CORS 支持。
 - **Pydantic**: 数据验证和设置管理。
 - **Alembic**: 数据库迁移。
-- **Docker Compose**: 简易的本地开发环境设置。
+- **uv**: 现代 Python 包管理工具。
 
 ## 使用 `uv` 进行设置
 
@@ -146,6 +167,22 @@ fastapi-skeleton/
     uv run alembic upgrade head
     ```
 
+## 测试
+
+使用 `pytest` 运行测试：
+```bash
+uv run pytest
+```
+
+## 工具脚本
+
+位于 `scripts/` 目录下的实用脚本：
+
+- **创建测试用户**:
+  ```bash
+  uv run python scripts/create_test_user.py
+  ```
+
 ## 项目结构
 
 ```
@@ -153,14 +190,17 @@ fastapi-skeleton/
 ├── app/
 │   ├── api/                # API 端点
 │   ├── core/               # 核心配置和安全
-│   ├── db/                 # 数据库设置
+│   ├── db/                 # 数据库和 Redis 设置
 │   ├── models/             # SQLAlchemy 模型
 │   ├── schemas/            # Pydantic 模式
 │   ├── crud/               # DAO / 仓库层
 │   ├── middleware/         # 自定义中间件
 │   └── main.py             # 入口点
-├── tests/                  # 测试
+├── alembic/                # 迁移脚本
+├── scripts/                # 工具脚本
+├── tests/                  # 测试用例
 ├── .env.example            # 环境变量示例
 ├── pyproject.toml          # Uv 配置
-└── requirements.txt        # Pip 依赖 (通过 uv export 生成)
+└── requirements.txt        # Pip 依赖
 ```
+
