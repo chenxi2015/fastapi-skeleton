@@ -48,6 +48,24 @@ This is a robust, scalable, and production-ready FastAPI skeleton framework.
 5.  **Access Documentation**:
     Open [http://localhost:8000/docs](http://localhost:8000/docs) to see the Swagger UI.
 
+## Multi-Environment Configuration
+
+This project supports dynamic loading of environment variables based on the `APP_ENV` variable.
+
+- **Development (Default)**: Loads `.env`
+  ```bash
+  uv run uvicorn app.main:app --reload
+  ```
+- **Test**: Loads `.env.test`
+  ```bash
+  # Linux/macOS
+  APP_ENV=test uv run uvicorn app.main:app --reload
+  ```
+- **Production**: Loads `.env.production`
+  ```bash
+  APP_ENV=production uv run uvicorn app.main:app --reload
+  ```
+
 ## Database Migrations
 
 This project uses Alembic for database migrations with **fully automated model detection**.
@@ -84,6 +102,10 @@ This project uses Alembic for database migrations with **fully automated model d
 - **Rollback migration**: `uv run alembic downgrade -1`
 
 📚 **For detailed migration workflow, see [docs/alembic_workflow.md](docs/alembic_workflow.md)**
+
+## Deployment
+
+For production deployment details, see **[docs/deployment.md](docs/deployment.md)**.
 
 ## Testing
 
@@ -172,6 +194,24 @@ fastapi-skeleton/
 5.  **访问文档**:
     打开 [http://localhost:8000/docs](http://localhost:8000/docs) 查看 Swagger UI。
 
+## 多环境配置
+
+本项目支持根据 `APP_ENV` 变量动态加载不同的配置环境。
+
+- **开发环境 (默认)**: 加载 `.env`
+  ```bash
+  uv run uvicorn app.main:app --reload
+  ```
+- **测试环境**: 加载 `.env.test`
+  ```bash
+  # Linux/macOS
+  APP_ENV=test uv run uvicorn app.main:app --reload
+  ```
+- **生产环境**: 加载 `.env.production`
+  ```bash
+  APP_ENV=production uv run uvicorn app.main:app --reload
+  ```
+
 ## 数据库迁移
 
 本项目使用 Alembic 进行数据库迁移，支持**完全自动化的模型检测**。
@@ -208,6 +248,10 @@ fastapi-skeleton/
 - **回滚迁移**: `uv run alembic downgrade -1`
 
 📚 **详细的迁移工作流程请参考 [docs/alembic_workflow.md](docs/alembic_workflow.md)**
+
+## 部署指南
+
+关于生产环境部署的详细说明，请参考 **[docs/deployment.md](docs/deployment.md)**。
 
 ## 测试
 

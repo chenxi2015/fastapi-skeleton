@@ -10,15 +10,12 @@ from app.middleware.logger_middleware import LoggerMiddleware
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup
-    print("Starting up...")
-    # Initialize Redis or other connections if needed explicitly
+    # Startup: Initialize Redis or other connections if needed explicitly
     # But we use RedisClient.get_client() lazy loading usually,
     # or we can initialize it here.
     _ = RedisClient.get_client()
     yield
     # Shutdown
-    print("Shutting down...")
     await RedisClient.close()
 
 
@@ -48,3 +45,9 @@ app.include_router(api_router, prefix=settings.API_V1_STR)
 @app.get("/")
 def root():
     return {"message": "Welcome to FastAPI Skeleton"}
+
+
+@app.get("/health")
+def health():
+    """健康检查端点，用于 Docker 健康检查和负载均衡器探测"""
+    return {"status": "healthy"}

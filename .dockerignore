@@ -1,0 +1,77 @@
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info
+dist
+build
+.eggs
+*.egg
+
+# Virtual environments
+.venv
+venv
+ENV
+env
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing
+.pytest_cache
+.coverage
+htmlcov
+.tox
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# CI/CD
+.github
+
+# Documentation
+*.md
+docs/
+README.md
+
+# Development tools
+.pre-commit-config.yaml
+
+# Environment files (应该通过环境变量或 secrets 注入)
+.env
+.env.*
+!.env.production
+!.env.test
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Scripts (如果不需要在容器中运行)
+scripts/
+
+# Tests
+tests/
+test_*.py
+*_test.py
+
+# Alembic versions (可选，取决于你的迁移策略)
+# alembic/versions/*.py

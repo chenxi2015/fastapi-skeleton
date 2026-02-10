@@ -2,7 +2,6 @@
 name = "fastapi-skeleton"
 version = "0.1.0"
 description = "FastAPI Skeleton with MySQL, Redis, JWT, and easy architecture"
-readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "fastapi>=0.109.0",

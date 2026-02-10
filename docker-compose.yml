@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      # 根据 APP_ENV 加载对应的 .env 文件
+      - .env.${APP_ENV:-production}
+    environment:
+      - APP_ENV=${APP_ENV:-production}
+    restart: always
