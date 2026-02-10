@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api import deps
 from app.crud.crud_user import user_crud
-from app.models.user import User
+from app.models.f_users import FUsers
 from app.schemas.user import UserCreate, User as UserSchema
 
 router = APIRouter()
@@ -12,7 +12,7 @@ router = APIRouter()
 
 @router.get("/me", response_model=UserSchema)
 async def read_user_me(
-    current_user: User = Depends(deps.get_current_active_user),
+    current_user: FUsers = Depends(deps.get_current_active_user),
 ) -> Any:
     """
     Get current user.

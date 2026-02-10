@@ -50,19 +50,40 @@ This is a robust, scalable, and production-ready FastAPI skeleton framework.
 
 ## Database Migrations
 
-This project uses Alembic for database migrations.
+This project uses Alembic for database migrations with **fully automated model detection**.
 
-1.  **Generate Migration**:
-    After modifying models in `app/models`, run:
-    ```bash
-    uv run alembic revision --autogenerate -m "Description of changes"
+### Adding a New Model (Fully Automated!)
+
+**Just create the model file** - that's it! No manual imports needed.
+
+1.  **Create Model File**:
+    ```python
+    # app/models/product.py
+    from sqlalchemy import Column, Integer, String
+    from app.db.base import Base
+    
+    class Product(Base):
+        __tablename__ = "products"
+        id = Column(Integer, primary_key=True)
+        name = Column(String(100), nullable=False)
     ```
 
-2.  **Apply Migration**:
-    To apply changes to the database:
+2.  **Generate and Apply Migration**:
     ```bash
+    uv run alembic revision --autogenerate -m "add products table"
     uv run alembic upgrade head
     ```
+
+**That's it!** The model is automatically detected. No need to modify `__init__.py` or `env.py`.
+
+### Useful Commands
+
+- **Check current version**: `uv run alembic current`
+- **View migration history**: `uv run alembic history`
+- **Check database status**: `uv run alembic check`
+- **Rollback migration**: `uv run alembic downgrade -1`
+
+📚 **For detailed migration workflow, see [docs/alembic_workflow.md](docs/alembic_workflow.md)**
 
 ## Testing
 
@@ -153,19 +174,40 @@ fastapi-skeleton/
 
 ## 数据库迁移
 
-本项目使用 Alembic 进行数据库迁移。
+本项目使用 Alembic 进行数据库迁移，支持**完全自动化的模型检测**。
 
-1.  **生成迁移脚本**:
-    在修改 `app/models` 中的模型后，运行：
-    ```bash
-    uv run alembic revision --autogenerate -m "修改描述"
+### 添加新模型（完全自动化！）
+
+**只需创建模型文件** - 就这样！无需手动导入。
+
+1.  **创建模型文件**:
+    ```python
+    # app/models/product.py
+    from sqlalchemy import Column, Integer, String
+    from app.db.base import Base
+    
+    class Product(Base):
+        __tablename__ = "products"
+        id = Column(Integer, primary_key=True)
+        name = Column(String(100), nullable=False)
     ```
 
-2.  **应用迁移**:
-    将更改应用到数据库：
+2.  **生成并应用迁移**:
     ```bash
+    uv run alembic revision --autogenerate -m "添加 products 表"
     uv run alembic upgrade head
     ```
+
+**就这样！** 模型会被自动检测。无需修改 `__init__.py` 或 `env.py`。
+
+### 常用命令
+
+- **查看当前版本**: `uv run alembic current`
+- **查看迁移历史**: `uv run alembic history`
+- **检查数据库状态**: `uv run alembic check`
+- **回滚迁移**: `uv run alembic downgrade -1`
+
+📚 **详细的迁移工作流程请参考 [docs/alembic_workflow.md](docs/alembic_workflow.md)**
 
 ## 测试
 
