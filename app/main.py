@@ -56,5 +56,20 @@ def health():
 def start():
     """Entry point for running the application via script"""
     import uvicorn
+    import socket
 
-    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
+    host = "0.0.0.0"
+    port = 8000
+
+    # Automatically find an available port starting from 8000
+    while port < 65535:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            try:
+                s.bind((host, port))
+                break
+            except OSError:
+                print(f"Port {port} is occupied, trying {port + 1}...")
+                port += 1
+
+    print(f"Starting server on http://{host}:{port}")
+    uvicorn.run("app.main:app", host=host, port=port, reload=True)
