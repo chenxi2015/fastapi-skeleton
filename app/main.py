@@ -51,3 +51,10 @@ def root():
 def health():
     """健康检查端点，用于 Docker 健康检查和负载均衡器探测"""
     return {"status": "healthy"}
+
+
+def start():
+    """Entry point for running the application via script"""
+    import uvicorn
+
+    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)

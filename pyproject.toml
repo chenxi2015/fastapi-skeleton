@@ -21,6 +21,9 @@ dependencies = [
     "sqlacodegen>=3.2.0",
 ]
 
+[project.scripts]
+fastapi-skeleton = "app.main:start"
+
 [dependency-groups]
 dev = [
     "pytest>=8.0.0",
